@@ -38,23 +38,37 @@ class BankAccount:
     def get_balance(self):
         return "The balance for {} is {}".format(self.account_name(), self.balance)
 
-    def deposit_statements(self,amount):
+    def deposit_statements(self):
+        for deposit in self.deposits:
+            print(deposit)
         
-        statement_deposit = " The deposit statements for {} {} is {}".format(self.first_name, self.last_name,amount)
-        return statement_deposit
+        
 
-    def withdrawal_statements(self,amount):
-        statement_withdraw = " The withdrawal statements for {} {} is {}".format(self.first_name, self.last_name,amount)
-        return statement_withdraw
+    def withdrawal_statements(self):
+        for withdraw in self.withdrawals:
+            print(withdraw)
+        
 
-    def give_loan(self,amount):
-        loan = "Dear {} {} you have received a loan of {} shillings".format(self.first_name, self.last_name,amount) 
-        return loan
+    def request_loan(self,amount):
+        if amount <= 0:
+            print("you cannot withdraw a negative value")
+        else:
+            self.loan = amount
+            print("you have been granted a loan of shillings {}".format(amount))   
+        
 
-    def pay_loan(self,amount):
-        if amount >= 1:
+    def repay_loan(self,amount):
+        if amount <= 0:
+            print("you cannot repay a negative amount.Kindly top up")
+        elif self.loan == 0:
+            print("you do not have an existing loan")
+        elif amount > self.loan:
+            print("your loan is {}, please enter a amount that is less or equal to your loan".format(self.loan))
+        else:
+            self.loan -= amount
             self.repay = self.loan - amount
-            print("You have paid {} shillings of the exixting loan".format(amount))
+            print("you have repaid your loan with this {}, your existing balance is {}".format(amount,self.loan))
+            
 
 
 
