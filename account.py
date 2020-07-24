@@ -40,12 +40,12 @@ class BankAccount:
         else:
             self.balance += amount
             time = datetime.now()
-            get_time = time.strftime("%H:%M%p %d/%m/%Y")
+            get_time = time.strftime("%H:%M%p , %d/%m/%Y")
             deposit = {
                 "time": "time",
                 "amount" : "amount"
             }
-            print("Dear {} you have deposited {} at {}.Your current balance is {}".format(self.account_name(),amount,get_time,self.balance))
+            print("Dear {} ,you have deposited {} at {}.Your current balance is {}".format(self.account_name(),amount,get_time,self.balance))
 
     def withdraw(self,amount):
         try:
@@ -63,7 +63,7 @@ class BankAccount:
         else:
             self.balance -= amount
             time = datetime.now()
-            get_time = time.strftime("%H:%M%p  %d/%m/%Y")
+            get_time = time.strftime("%H:%M%p ,  %d/%m/%Y")
             deposit = {
                 "time": "time",
                 "amount" : "amount"
@@ -73,19 +73,19 @@ class BankAccount:
     
     def get_balance(self):
         time = datetime.now()
-        get_time = time.strftime("%H:%M%p  %d/%m/%Y")
+        get_time = time.strftime("%H:%M%p ,  %d/%m/%Y")
         return "The balance for {} is {} at".format(self.account_name(), self.balance,get_time)
 
     def deposit_statements(self):
         for deposit in self.deposits:
             time = datetime.now()
-            get_time = time.strftime("%H:%M%p  %d/%m/%Y")
+            get_time = time.strftime("%H:%M%p  , %d/%m/%Y")
             print("{} at {}".format(deposit(),get_time))
         
     def withdrawal_statements(self):
         for withdraw in self.withdrawals:
             time = datetime.now()
-            get_time = time.strftime("%H:%M%p  %d/%m/%Y")
+            get_time = time.strftime("%H:%M%p , ++ %d/%m/%Y")
             print("{} at {}".format(withdraw(),get_time))
 
     def request_loan(self,amount):
