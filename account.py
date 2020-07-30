@@ -1,10 +1,10 @@
 from datetime import datetime
-class BankAccount:
+class Account:
 
-    def __init__(self, first_name, last_name, bank, phone_number):
+    def __init__(self, first_name, last_name, phone_number):
         self.first_name = first_name
         self.last_name = last_name
-        self.bank = bank
+        
         self.phone_number = phone_number
         self.balance = 0
         self.deposits = []
@@ -146,7 +146,79 @@ class BankAccount:
             get_time = self.get_formatted_time(time)
             statement = "you repaid {} on {}".format(amount,get_time)
             print(statement)
-            
+
+class BankAccount(Account):
+    def __init__(self,first_name,last_name,phone_number,bank):
+        self.bank = bank
+        super().__init__(first_name,last_name,phone_number)
+
+class MobileMoney(Account):
+    def __init__(self,first_name,last_name,phone_number,service_provider):
+
+        self.service_provider = service_provider
+        self.airtime=[]
+        super().__init__(first_name,last_name,phone_number)
+
+    def buy_airtime(self,amount):
+        try:
+            amount + 1
+        except TypeError:
+            print("The amount should be in figures")
+            return
+        
+        if amount > self.balance:
+            print("you do not have enough balance. Your balance is {}".format(self.balance))
+        
+        else:
+            self.balance -= amount
+            time = datetime.now()
+            airtime = {
+                "time":"time",
+                "airtime":"amount"
+            }
+            self.airtime.append(airtime)
+            print("you have bought airtime worth {} shillings on {}. Your  balance is {}".format(amount,get_formatted_time(time),self.balance))
+
+    def send_money(self,amount):
+        try:
+            amount + 10
+        except TypeError:
+            print("The amount should be in digits")
+
+        if amount > self.balance:
+            print("you have insufficient funds to conduct the transaction")
+        else:
+            self.balance -= amount
+            time = datetime.now()
+            print("you have sent {} on {}. Your account balance is {}".format(amount,get_formatted_time(time),self.balance))
+
+    def receive_money(self,amount):
+        try:
+            amount + 10
+        except TypeError:
+            print("The amount should be in digits")
+
+        if amount > self.balance:
+            time = datetime.now()
+            print("you have received {} on {}. Your balance is {}".format(amount,get_formatted_time(time),self.balance))
+
+    def paybill(self,amount):
+        try:
+            amount + 10
+        except TypeError:
+            print("The amount should be in digits")
+
+        if amount > self.balance:
+            print("your balance cannot pay the above bill")
+
+        else:
+            amount <= self.balance
+            time = datetime.now()
+            print("you have paid a bill of {} on {}. Your account balance is {}".format(amount,get_formatted_time,self.balance))
+
+        
+
+
 
 
 
