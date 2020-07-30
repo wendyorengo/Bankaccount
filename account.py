@@ -9,6 +9,7 @@ class BankAccount:
         self.balance = 0
         self.deposits = []
         self.withdrawals = []
+        self.loan_repayments =[]
         self.loan = 0
         self.pay_loan = 0
     
@@ -18,7 +19,10 @@ class BankAccount:
         name = "{}  {} account for {}".format(
             self.first_name, self.last_name, self.bank)
         return name
-    
+
+    def get_formatted_time(self,time):
+        return time.strftime("%H:%M%p , %d/%m/%Y")
+
     def deposit(self, amount):
         try:
 
@@ -40,7 +44,7 @@ class BankAccount:
         else:
             self.balance += amount
             time = datetime.now()
-            get_time = time.strftime("%H:%M%p , %d/%m/%Y")
+            get_time = self.get_formatted_time(time)
             deposit = {
                 "time": "time",
                 "amount" : "amount"
@@ -63,7 +67,7 @@ class BankAccount:
         else:
             self.balance -= amount
             time = datetime.now()
-            get_time = time.strftime("%H:%M%p ,  %d/%m/%Y")
+            get_time = self.get_formatted_time(time)
             deposit = {
                 "time": "time",
                 "amount" : "amount"
@@ -73,19 +77,19 @@ class BankAccount:
     
     def get_balance(self):
         time = datetime.now()
-        get_time = time.strftime("%H:%M%p ,  %d/%m/%Y")
+        get_time =  self.get_formatted_time(time)
         return "The balance for {} is {} at".format(self.account_name(), self.balance,get_time)
 
     def deposit_statements(self):
         for deposit in self.deposits:
             time = datetime.now()
-            get_time = time.strftime("%H:%M%p  , %d/%m/%Y")
+            get_time =  self.get_formatted_time(time)
             print("{} at {}".format(deposit(),get_time))
         
     def withdrawal_statements(self):
         for withdraw in self.withdrawals:
             time = datetime.now()
-            get_time = time.strftime("%H:%M%p , ++ %d/%m/%Y")
+            get_time =  self.get_formatted_time(time)
             print("{} at {}".format(withdraw(),get_time))
 
     def request_loan(self,amount):
@@ -107,7 +111,7 @@ class BankAccount:
         else:
             self.loan = amount
             time = datetime.now()
-            get_time = time.strftime("%H:%M%p  %d/%m/%Y")
+            get_time = self.get_formatted_time(time)
             print("you have been granted a loan of shillings {} at {}".format(amount,get_time))   
         
 
@@ -126,9 +130,22 @@ class BankAccount:
         else:
             self.loan -= amount
             self.repay = self.loan - amount
+            repayment = {
+                "time":"time",
+                "amount":"amount"
+            }
+            self.loan_repayments.append(repayment)
             time = datetime.now()
-            get_time = time.strftime("%H:%M%p  %d/%m/%Y")
+            get_time = self.get_formatted_time(time)
             print("you have repaid your loan with this {}, your existing balance is {} at {}".format(amount,self.loan,get_time))
+    
+    def loan_repayment_statement(self):
+        for repayment in self.loan_repayments:
+            time = repayment['time']
+            amount = repayment['amount']
+            get_time = self.get_formatted_time(time)
+            statement = "you repaid {} on {}".format(amount,get_time)
+            print(statement)
             
 
 
