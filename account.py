@@ -198,7 +198,6 @@ class MobileMoney(Account):
         except TypeError:
             print("The amount should be in digits")
 
-        if amount > self.balance:
             time = datetime.now()
             print("you have received {} on {}. Your balance is {}".format(amount,get_formatted_time(time),self.balance))
 
